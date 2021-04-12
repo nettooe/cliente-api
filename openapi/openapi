@@ -1,0 +1,141 @@
+---
+openapi: 3.0.3
+info:
+  title: Cliente API
+  contact:
+    name: Oliver Netto
+    url: https://www.linkedin.com/in/olivernetto
+    email: netto.oe@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+tags:
+- name: cliente
+  description: Operações relacionadas a cliente.
+paths:
+  /cliente:
+    get:
+      tags:
+      - cliente
+      summary: Pesquisar clientes usando filtro e paginação
+      parameters:
+      - name: page.limit
+        in: query
+        schema:
+          format: int32
+          type: integer
+      - name: page.start
+        in: query
+        schema:
+          format: int32
+          type: integer
+      requestBody:
+        description: Filtro por campo.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClienteRequest'
+        required: true
+      responses:
+        "200":
+          description: OK
+    post:
+      tags:
+      - cliente
+      summary: Cadastrar um novo cliente.
+      requestBody:
+        description: Dados do cliente para gravar.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClienteRequest'
+        required: true
+      responses:
+        "200":
+          description: OK
+  /cliente/{id}:
+    get:
+      tags:
+      - cliente
+      summary: Obter cliente por ID.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "200":
+          description: OK
+    put:
+      tags:
+      - cliente
+      summary: Atualização dos dados de um cliente.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        description: Cliente data to persist.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClienteRequest'
+        required: true
+      responses:
+        "200":
+          description: OK
+    delete:
+      tags:
+      - cliente
+      summary: Exclusão física de um cliente.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "200":
+          description: OK
+    patch:
+      tags:
+      - cliente
+      summary: Atualização dos dados de um cliente.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        description: Dados a serem atualizados de um cliente.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClienteRequest'
+        required: true
+      responses:
+        "200":
+          description: OK
+components:
+  schemas:
+    LocalDate:
+      format: date
+      type: string
+    ClienteRequest:
+      type: object
+      properties:
+        dataNascimento:
+          $ref: '#/components/schemas/LocalDate'
+        email:
+          type: string
+        nome:
+          type: string
