@@ -2,8 +2,6 @@ package br.com.nettooe.rest.dto;
 
 import java.time.LocalDate;
 
-import javax.validation.constraints.Email;
-
 public class ClienteRequest {
 
 	public String nome;
