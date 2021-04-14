@@ -46,7 +46,8 @@ public class ClienteRS {
 	public Response pesquisar(
 			@QueryParam("page.start") Integer pageStart,
 			@QueryParam("page.limit") Integer pageLimit,
-			@RequestBody(required = true, name = "filtro", description = "Filtro por campo.") ClienteRequest cliente) {
+			@QueryParam("cliente.nome") String nome,
+			@QueryParam("cliente.email") String email) {
 	
 		if(pageStart == null) {
 			pageStart = 0;
@@ -54,6 +55,10 @@ public class ClienteRS {
 		if(pageLimit == null) {
 			pageLimit = 5;
 		}
+		
+		ClienteRequest cliente = new ClienteRequest();
+		cliente.nome = nome;
+		cliente.email = email;
 		
 		Page pagina = Page.of(pageStart, pageLimit);
 		
@@ -71,13 +76,16 @@ public class ClienteRS {
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getClienteById(@PathParam("id") Long id) {
-		Optional<Cliente> optional = repository.findByIdOptional(id);
+		final Optional<Cliente> optional = repository.findByIdOptional(id);
 
 		if (!optional.isPresent()) {
 			return Response.status(Status.NOT_FOUND).build();
 		}
+		
+		final Cliente entity = optional.get();
+		final ClienteResponse clienteResponse = new ClienteResponse(entity.id, entity.nome, entity.email, entity.dataNascimento);
 
-		return Response.ok(optional.get()).build();
+		return Response.ok(clienteResponse).build();
 	}
 
 	@POST
