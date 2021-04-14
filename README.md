@@ -80,3 +80,10 @@ Para inicializar, execute os dois comandos a seguir:
 docker-compose up -d --build
 ```
 
+## Checando a saúde da aplicação
+
+Para checar se a aplicação está em execução, acesse:
+
+```
+http://localhost:8080/health
+```
