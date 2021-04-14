@@ -20,6 +20,14 @@ paths:
       - cliente
       summary: Pesquisar clientes usando filtro e paginação
       parameters:
+      - name: cliente.email
+        in: query
+        schema:
+          type: string
+      - name: cliente.nome
+        in: query
+        schema:
+          type: string
       - name: page.limit
         in: query
         schema:
@@ -30,13 +38,6 @@ paths:
         schema:
           format: int32
           type: integer
-      requestBody:
-        description: Filtro por campo.
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ClienteRequest'
-        required: true
       responses:
         "200":
           description: OK
@@ -81,7 +82,7 @@ paths:
           format: int64
           type: integer
       requestBody:
-        description: Cliente data to persist.
+        description: Dados para atualizar um cliente.
         content:
           application/json:
             schema:
@@ -107,7 +108,7 @@ paths:
     patch:
       tags:
       - cliente
-      summary: Atualização dos dados de um cliente.
+      summary: Atualização parcial dos dados de um cliente.
       parameters:
       - name: id
         in: path
@@ -127,14 +128,12 @@ paths:
           description: OK
 components:
   schemas:
-    LocalDate:
-      format: date
-      type: string
     ClienteRequest:
       type: object
       properties:
         dataNascimento:
-          $ref: '#/components/schemas/LocalDate'
+          format: date
+          type: string
         email:
           type: string
         nome:
