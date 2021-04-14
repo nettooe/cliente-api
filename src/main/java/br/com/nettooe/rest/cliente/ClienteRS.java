@@ -103,7 +103,7 @@ public class ClienteRS {
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response save(@PathParam("id") Long id, @RequestBody(required = true, name = "cliente", description = "Cliente data to persist.") ClienteRequest cliente) {
+	public Response save(@PathParam("id") Long id, @RequestBody(required = true, name = "cliente", description = "Dados para atualizar um cliente.") ClienteRequest cliente) {
 		Cliente saved = repository.partialUpdate(id, cliente);
 		if(saved!=null) {
 			return Response.ok().build();
@@ -113,7 +113,7 @@ public class ClienteRS {
 	}
 	
 	@PATCH
-	@Operation(summary = "Atualização dos dados de um cliente.")
+	@Operation(summary = "Atualização parcial dos dados de um cliente.")
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
