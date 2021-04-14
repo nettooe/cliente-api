@@ -1,25 +1,28 @@
 package br.com.nettooe.rest.dto;
 
 import java.time.LocalDate;
-
-import javax.validation.constraints.Email;
+import java.time.Period;
 
 public class ClienteResponse {
+	
+	public Long id;
 
 	public String nome;
 
-//	@Email
 	public String email;
 
 	public LocalDate dataNascimento;
+
+	public Integer idade;
 
 	/**
 	 * @param name
 	 * @param cpf
 	 * @param address
 	 */
-	public ClienteResponse(String nome, String email, LocalDate dataNascimento) {
+	public ClienteResponse(Long id, String nome, String email, LocalDate dataNascimento) {
 		super();
+		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.dataNascimento = dataNascimento;
@@ -51,6 +54,11 @@ public class ClienteResponse {
 
 	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
+	}
+
+	public Integer getIdade() {
+		Period p = Period.between(getDataNascimento(), LocalDate.now());
+		return p.getYears();
 	}
 
 }
