@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "9458fdab-2713-441c-aa60-8098dcc0887a",
+		"_postman_id": "ad542635-b76d-49ec-b821-5605b90c59ea",
 		"name": "Cliente API",
 		"description": "Contact Support:\n Name: Oliver Netto\n Email: netto.oe@gmail.com",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -29,7 +29,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "1",
+											"value": "20798019",
 											"description": "(Required) "
 										}
 									]
@@ -83,7 +83,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"dataNascimento\": \"1970-03-09\",\n    \"email\": \"consectetur anim magna laboris sint\",\n    \"nome\": \"exercitation irure \"\n}"
+									"raw": "{\n    \"dataNascimento\": \"1950-03-15\",\n    \"email\": \"elit \",\n    \"nome\": \"ut amet cillum proident\"\n}"
 								},
 								"url": {
 									"raw": "{{baseUrl}}/cliente/:id",
@@ -97,7 +97,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "50873338",
+											"value": "20798019",
 											"description": "(Required) "
 										}
 									]
@@ -111,7 +111,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"dataNascimento\": \"1970-03-09\",\n    \"email\": \"consectetur anim magna laboris sint\",\n    \"nome\": \"exercitation irure \"\n}"
+											"raw": "{\n    \"dataNascimento\": \"1950-03-15\",\n    \"email\": \"elit \",\n    \"nome\": \"ut amet cillum proident\"\n}"
 										},
 										"url": {
 											"raw": "{{baseUrl}}/cliente/:id",
@@ -160,7 +160,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "50873338",
+											"value": "20798019",
 											"description": "(Required) "
 										}
 									]
@@ -203,7 +203,7 @@
 							]
 						},
 						{
-							"name": "Atualização dos dados de um cliente.",
+							"name": "Atualização parcial dos dados de um cliente.",
 							"request": {
 								"method": "PATCH",
 								"header": [
@@ -214,7 +214,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"dataNascimento\": \"1970-03-09\",\n    \"email\": \"consectetur anim magna laboris sint\",\n    \"nome\": \"exercitation irure \"\n}"
+									"raw": "{\n    \"dataNascimento\": \"1950-03-15\",\n    \"email\": \"elit \",\n    \"nome\": \"ut amet cillum proident\"\n}"
 								},
 								"url": {
 									"raw": "{{baseUrl}}/cliente/:id",
@@ -228,7 +228,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "50873338",
+											"value": "20798019",
 											"description": "(Required) "
 										}
 									]
@@ -242,7 +242,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"dataNascimento\": \"1970-03-09\",\n    \"email\": \"consectetur anim magna laboris sint\",\n    \"nome\": \"exercitation irure \"\n}"
+											"raw": "{\n    \"dataNascimento\": \"1950-03-15\",\n    \"email\": \"elit \",\n    \"nome\": \"ut amet cillum proident\"\n}"
 										},
 										"url": {
 											"raw": "{{baseUrl}}/cliente/:id",
@@ -280,14 +280,9 @@
 					"name": "Pesquisar clientes usando filtro e paginação",
 					"request": {
 						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
+						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/cliente?page.limit=50873338&page.start=50873338",
+							"raw": "{{baseUrl}}/cliente?cliente.email=eiusmod elit ut commodo&cliente.nome=eiusmod elit ut commodo&page.limit=20798019&page.start=20798019",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -296,12 +291,20 @@
 							],
 							"query": [
 								{
+									"key": "cliente.email",
+									"value": "eiusmod elit ut commodo"
+								},
+								{
+									"key": "cliente.nome",
+									"value": "eiusmod elit ut commodo"
+								},
+								{
 									"key": "page.limit",
-									"value": "50873338"
+									"value": "20798019"
 								},
 								{
 									"key": "page.start",
-									"value": "50873338"
+									"value": "20798019"
 								}
 							]
 						}
@@ -313,7 +316,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{baseUrl}}/cliente?page.limit=50873338&page.start=50873338",
+									"raw": "{{baseUrl}}/cliente?cliente.email=eiusmod elit ut commodo&cliente.nome=eiusmod elit ut commodo&page.limit=20798019&page.start=20798019",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -322,12 +325,20 @@
 									],
 									"query": [
 										{
+											"key": "cliente.email",
+											"value": "eiusmod elit ut commodo"
+										},
+										{
+											"key": "cliente.nome",
+											"value": "eiusmod elit ut commodo"
+										},
+										{
 											"key": "page.limit",
-											"value": "50873338"
+											"value": "20798019"
 										},
 										{
 											"key": "page.start",
-											"value": "50873338"
+											"value": "20798019"
 										}
 									]
 								}
@@ -358,7 +369,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"dataNascimento\": \"1970-03-09\",\n    \"email\": \"consectetur anim magna laboris sint\",\n    \"nome\": \"exercitation irure \"\n}"
+							"raw": "{\n    \"dataNascimento\": \"1950-03-15\",\n    \"email\": \"elit \",\n    \"nome\": \"ut amet cillum proident\"\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/cliente",
@@ -378,7 +389,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"dataNascimento\": \"1970-03-09\",\n    \"email\": \"consectetur anim magna laboris sint\",\n    \"nome\": \"exercitation irure \"\n}"
+									"raw": "{\n    \"dataNascimento\": \"1950-03-15\",\n    \"email\": \"elit \",\n    \"nome\": \"ut amet cillum proident\"\n}"
 								},
 								"url": {
 									"raw": "{{baseUrl}}/cliente",
@@ -429,8 +440,9 @@
 	],
 	"variable": [
 		{
+			"id": "05f149de-2890-4ad6-95f2-440956bf590c",
 			"key": "baseUrl",
-			"value": "http://localhost:8080/"
+			"value": "http://ec2co-ecsel-100am0dip8zlf-101293486.us-east-1.elb.amazonaws.com:8080"
 		}
 	]
 }
