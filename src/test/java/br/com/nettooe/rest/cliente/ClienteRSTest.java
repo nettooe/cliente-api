@@ -1,12 +1,18 @@
 package br.com.nettooe.rest.cliente;
 
+import javax.json.bind.JsonbBuilder;
 import javax.ws.rs.core.MediaType;
 
+import org.hamcrest.CoreMatchers;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 
+import br.com.nettooe.rest.dto.ClienteRequest;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.RestAssured;
 
@@ -18,7 +24,7 @@ public class ClienteRSTest {
 	@Order(1)
 	public void test_POST() {
 		RestAssured.given()
-			.body("{\"email\": \"teste@test.com\", \"dataNascimento\": \"1987-01-20\", \"nome\": \"Leonardo DaVinci\"}")
+			.body("{\"email\": \"teste1@test.com\", \"dataNascimento\": \"1987-01-20\", \"nome\": \"Leonardo DaVinci\"}")
 				.header("Content-Type", MediaType.APPLICATION_JSON)
 				.header("accept", "*/*")
 				.when()
@@ -27,7 +33,7 @@ public class ClienteRSTest {
 					.statusCode(201);
 		
 		RestAssured.given()
-		.body("{\"email\": \"teste@gmail.com\", \"dataNascimento\": \"1981-02-10\", \"nome\": \"Albert Einstein\"}")
+		.body("{\"email\": \"teste2@gmail.com\", \"dataNascimento\": \"1981-02-10\", \"nome\": \"Albert Einstein\"}")
 			.header("Content-Type", MediaType.APPLICATION_JSON)
 			.header("accept", "*/*")
 			.when()
@@ -36,7 +42,7 @@ public class ClienteRSTest {
 				.statusCode(201);
 		
 		RestAssured.given()
-		.body("{\"email\": \"teste@test.com\", \"dataNascimento\": \"1987-01-20\", \"nome\": \"Frank Sinatra\"}")
+		.body("{\"email\": \"teste3@test.com\", \"dataNascimento\": \"1987-01-20\", \"nome\": \"Frank Sinatra\"}")
 			.header("Content-Type", MediaType.APPLICATION_JSON)
 			.header("accept", "*/*")
 			.when()
@@ -108,5 +114,39 @@ public class ClienteRSTest {
 				.then()
 					.statusCode(404);
 	}
+	
+	
+	@ParameterizedTest
+	@Order(7)
+	@CsvFileSource(resources = "/parameters_POST_cliente.csv", delimiter = ';')
+	public void test_POST_assured(String nome, String email, String dataNascimento, Integer httpStatus, String codigoErro) {
+	     
+	     final String json = JsonbBuilder.create().toJson(new ClienteRequest(nome, email, dataNascimento));
+	     
+//	     System.out.println(json);
+	     
+	     if(httpStatus == 201) {
+		 RestAssured.given().body(json)
+         	     	.header("Content-Type", MediaType.APPLICATION_JSON)
+         		.header("accept", "*/*")
+ 			.when()
+ 				.post("/cliente")
+ 			.then()
+ 				.statusCode(httpStatus);
+	     } else if(httpStatus == 400) {
+		 RestAssured.given().body(json)
+        	     	.header("Content-Type", MediaType.APPLICATION_JSON)
+        		.header("accept", "*/*")
+        			.when()
+        				.post("/cliente")
+        			.then()
+        				.statusCode(httpStatus)
+        				.and().body(CoreMatchers.containsString(codigoErro));
+	     } else {
+		 Assertions.fail();
+	     }
+	     			
+	}
+	
 	
 }
