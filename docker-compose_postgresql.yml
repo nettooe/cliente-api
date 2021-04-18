@@ -1,0 +1,46 @@
+version: "3.3"
+services:
+
+    postgres-compose:
+      image: postgres
+      environment:
+        POSTGRES_PASSWORD: "admin1234"
+      ports:
+        - "15432:5432"
+      networks:
+        - cliente-api-network
+        
+    pgadmin-compose:
+      image: dpage/pgadmin4
+      environment:
+        PGADMIN_DEFAULT_EMAIL: "netto.oe@gmail.com"
+        PGADMIN_DEFAULT_PASSWORD: "admin1234"
+      ports:
+        - "16543:80"
+      depends_on:
+        - postgres-compose
+      networks:
+        - cliente-api-network
+
+    cliente-api:
+      image: nettooe/cliente-api-jvm:6.0.0
+      build:
+          context: ./
+          dockerfile: src/main/docker/Dockerfile.jvm
+      environment: 
+          QUARKUS_DATASOURCE_KIND: postgresql
+          QUARKUS_DATASOURCE_JDBC_URL: jdbc:postgresql://postgres-compose:5432/postgres
+          QUARKUS_DATASOURCE_USERNAME: postgres
+          QUARKUS_DATASOURCE_PASSWORD: admin1234
+          QUARKUS_DATASOURCE_JDBC_MIN_SIZE: 1
+          QUARKUS_DATASOURCE_JDBC_MAX_SIZE: 10
+      ports: 
+          - 8080:8080
+      depends_on: 
+          - postgres-compose
+      networks:
+          - cliente-api-network
+
+networks: 
+  cliente-api-network:
+    driver: bridge
