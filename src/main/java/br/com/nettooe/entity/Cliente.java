@@ -11,7 +11,7 @@ import javax.persistence.Id;
 public class Cliente {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long id;
 
 	public String nome;
@@ -23,9 +23,9 @@ public class Cliente {
 	}
 
 	/**
-	 * @param name
+	 * @param nome
 	 * @param email
-	 * @param address
+	 * @param dataNascimento
 	 */
 	public Cliente(String nome, String email, LocalDate dataNascimento) {
 		super();

@@ -1,22 +1,19 @@
 package br.com.nettooe.rest.dto;
 
-import java.time.LocalDate;
-
 public class ClienteRequest {
 
 	public String nome;
 
-//	@Email
 	public String email;
 
-	public LocalDate dataNascimento;
+	public String dataNascimento;
 
 	/**
 	 * @param name
 	 * @param cpf
 	 * @param address
 	 */
-	public ClienteRequest(String nome, String email, LocalDate dataNascimento) {
+	public ClienteRequest(String nome, String email, String dataNascimento) {
 		super();
 		this.nome = nome;
 		this.email = email;
@@ -43,11 +40,11 @@ public class ClienteRequest {
 		this.email = email;
 	}
 
-	public LocalDate getDataNascimento() {
+	public String getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(LocalDate dataNascimento) {
+	public void setDataNascimento(String dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 
